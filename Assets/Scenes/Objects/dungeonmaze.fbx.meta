@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: f62e42bd3c9a0494aa34d732fe40b5c1
+timeCreated: 1495405692
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: doorpanel
+    100002: doorpanel 1
+    100004: doorpanel1
+    100006: doorpanel1 1
+    100008: doorpanel10
+    100010: doorpanel11
+    100012: doorpanel2
+    100014: doorpanel2 1
+    100016: doorpanel3
+    100018: doorpanel3 1
+    100020: doorpanel4
+    100022: doorpanel4 1
+    100024: doorpanel5
+    100026: doorpanel5 1
+    100028: doorpanel6
+    100030: doorpanel6 1
+    100032: doorpanel7
+    100034: doorpanel7 1
+    100036: doorpanel8
+    100038: doorpanel9
+    100040: //RootNode
+    100042: floor
+    100044: gate
+    100046: gatestart
+    100048: group2
+    100050: wall1
+    100052: wall2
+    400000: doorpanel
+    400002: doorpanel 1
+    400004: doorpanel1
+    400006: doorpanel1 1
+    400008: doorpanel10
+    400010: doorpanel11
+    400012: doorpanel2
+    400014: doorpanel2 1
+    400016: doorpanel3
+    400018: doorpanel3 1
+    400020: doorpanel4
+    400022: doorpanel4 1
+    400024: doorpanel5
+    400026: doorpanel5 1
+    400028: doorpanel6
+    400030: doorpanel6 1
+    400032: doorpanel7
+    400034: doorpanel7 1
+    400036: doorpanel8
+    400038: doorpanel9
+    400040: //RootNode
+    400042: floor
+    400044: gate
+    400046: gatestart
+    400048: group2
+    400050: wall1
+    400052: wall2
+    2300000: doorpanel
+    2300002: doorpanel 1
+    2300004: doorpanel1
+    2300006: doorpanel1 1
+    2300008: doorpanel10
+    2300010: doorpanel11
+    2300012: doorpanel2
+    2300014: doorpanel2 1
+    2300016: doorpanel3
+    2300018: doorpanel3 1
+    2300020: doorpanel4
+    2300022: doorpanel4 1
+    2300024: doorpanel5
+    2300026: doorpanel5 1
+    2300028: doorpanel6
+    2300030: doorpanel6 1
+    2300032: doorpanel7
+    2300034: doorpanel7 1
+    2300036: doorpanel8
+    2300038: doorpanel9
+    2300040: floor
+    2300042: wall1
+    2300044: wall2
+    3300000: doorpanel
+    3300002: doorpanel 1
+    3300004: doorpanel1
+    3300006: doorpanel1 1
+    3300008: doorpanel10
+    3300010: doorpanel11
+    3300012: doorpanel2
+    3300014: doorpanel2 1
+    3300016: doorpanel3
+    3300018: doorpanel3 1
+    3300020: doorpanel4
+    3300022: doorpanel4 1
+    3300024: doorpanel5
+    3300026: doorpanel5 1
+    3300028: doorpanel6
+    3300030: doorpanel6 1
+    3300032: doorpanel7
+    3300034: doorpanel7 1
+    3300036: doorpanel8
+    3300038: doorpanel9
+    3300040: floor
+    3300042: wall1
+    3300044: wall2
+    4300000: wall2
+    4300002: wall1
+    4300004: floor
+    4300006: doorpanel5
+    4300008: doorpanel4
+    4300010: doorpanel3
+    4300012: doorpanel2
+    4300014: doorpanel1
+    4300016: doorpanel
+    4300018: doorpanel6
+    4300020: doorpanel7
+    4300022: doorpanel5
+    4300024: doorpanel4
+    4300026: doorpanel3
+    4300028: doorpanel2
+    4300030: doorpanel1
+    4300032: doorpanel
+    4300034: doorpanel6
+    4300036: doorpanel7
+    4300038: doorpanel8
+    4300040: doorpanel9
+    4300042: doorpanel10
+    4300044: doorpanel11
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 50
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
