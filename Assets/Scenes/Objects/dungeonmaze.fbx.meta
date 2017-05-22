@@ -128,6 +128,29 @@ ModelImporter:
     4300040: doorpanel9
     4300042: doorpanel10
     4300044: doorpanel11
+    6400000: doorpanel
+    6400002: doorpanel 1
+    6400004: doorpanel1
+    6400006: doorpanel1 1
+    6400008: doorpanel10
+    6400010: doorpanel11
+    6400012: doorpanel2
+    6400014: doorpanel2 1
+    6400016: doorpanel3
+    6400018: doorpanel3 1
+    6400020: doorpanel4
+    6400022: doorpanel4 1
+    6400024: doorpanel5
+    6400026: doorpanel5 1
+    6400028: doorpanel6
+    6400030: doorpanel6 1
+    6400032: doorpanel7
+    6400034: doorpanel7 1
+    6400036: doorpanel8
+    6400038: doorpanel9
+    6400040: floor
+    6400042: wall1
+    6400044: wall2
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -155,7 +178,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 50
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
