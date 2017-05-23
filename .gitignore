@@ -32,3 +32,25 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+*.info
+
+*.backup
+
+*.txt
+
+Assets/Prefabs/SheepValue1 1.prefab.meta
+
+Assets/Prefabs/SheepValue2.prefab.meta
+
+Assets/Prefabs/SheepValue3.prefab.meta
+
+Assets/Prefabs/SheepValue4.prefab.meta
+
+Assets/Scenes/YashScene.unity.meta
+
+Assets/Scenes/Objects/Materials/sheep-01.mat.meta
+
+Assets/Scenes/Objects/Materials/sheep-03.mat.meta
+
+Assets/Scenes/Objects/Materials/sheep-05.mat.meta

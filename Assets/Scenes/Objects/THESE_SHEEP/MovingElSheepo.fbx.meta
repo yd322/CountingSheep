@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 663ade96e1b6348649a02463dfe32a66
-timeCreated: 1495405677
-licenseType: Free
+guid: b7467f0b2da437b4ca6cb97d5b1bc0d0
+timeCreated: 1495568461
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -77,22 +77,9 @@ ModelImporter:
     4300022: pCylinder9
     4300024: pCylinder10
     4300026: pCylinder11
-    6400000: pCylinder1
-    6400002: pCylinder10
-    6400004: pCylinder11
-    6400006: pCylinder5
-    6400008: pCylinder6
-    6400010: pCylinder7
-    6400012: pCylinder8
-    6400014: pCylinder9
-    6400016: pSphere1
-    6400018: pSphere3
-    6400020: pSphere4
-    6400022: pSphere7
-    6400024: pSphere8
-    6400026: pSphere9
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -107,7 +94,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -119,7 +106,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 50
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
