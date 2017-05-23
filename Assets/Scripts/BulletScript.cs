@@ -18,7 +18,14 @@ public class BulletScript : MonoBehaviour
 
 		if (hit.tag == "Sheep")
 		{
-			// Do some mathy stuff here, Yash!
+			SheepScript sheep = hit.GetComponent<SheepScript> ();
+			Debug.Log ("COLLIDED");
+			if (sheep != null)
+			{			
+
+				sheep.KillSheep();
+			}		
+		
 		}
 
 		ClearBullet();

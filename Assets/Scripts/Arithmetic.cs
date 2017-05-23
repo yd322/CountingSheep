@@ -27,7 +27,7 @@ public class Arithmetic : MonoBehaviour {
 	void Start () {
 
 		// Printing the Integer on Screen at Time Intervals
-		InvokeRepeating("PrintIntegerOnScreen", 0.0f, 7.0f);
+		InvokeRepeating("PrintIntegerOnScreen", 0.0f, 20.0f);
 
 		equation.GetComponent<UnityEngine.UI.Text> ().text = "Equation: ";
 	}
@@ -41,7 +41,7 @@ public class Arithmetic : MonoBehaviour {
 	void PrintIntegerOnScreen()
 	{
 		// Generating a Random Integer between 1 and 100
-		randomInt = Random.Range(0,100);
+		randomInt = Random.Range(1,10);
 
 		// Setting GUItext Score to a Random Generated Value
 		score.GetComponent<UnityEngine.UI.Text>().text = "Result: " + randomInt.ToString();
@@ -58,16 +58,26 @@ public class Arithmetic : MonoBehaviour {
 		value += val;
 		var result = " = " + value;
 
-		// If its the initial bullet
-		if (initial == 1) {
-			equationnew += val;
-			initial = 0;
+		// If a Succesfull Match is Made for the Equation==Result
+		if (value.Equals (randomInt)) {
+			equation.GetComponent<UnityEngine.UI.Text> ().text = "Equation: Successfully Matched!!";
+			value = 0;
+			val = 0;
+			equationnew = "";
+			initial = 1;
+			PrintIntegerOnScreen ();
 		}
-		else
-			equationnew += "+ " + val;
-		
-		equation.GetComponent<UnityEngine.UI.Text> ().text = "Equation: " + equationnew + result;
+		else {
 
+			// If its the initial bullet
+			if (initial == 1) {
+				equationnew += val;
+				initial = 0;
+			} else
+				equationnew += "+ " + val;
+		
+			equation.GetComponent<UnityEngine.UI.Text> ().text = "Equation: " + equationnew + result;
+		}
 
 	}
 
