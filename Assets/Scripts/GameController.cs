@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour
 {
 	public Transform[] spawnPoints;
 	public GameObject sheepTemplate;
-	public Sprite[] sheepSkins;
+	public Material[] sheepSkins;
 
 	void Awake()
 	{
