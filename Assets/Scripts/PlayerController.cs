@@ -11,12 +11,18 @@ public class PlayerController : MonoBehaviour
 	public float shotSpeed;
 
 	private float shotCooldownRemaining = 0f;
+	private bool canShoot = false;
+
+	void Awake()
+	{
+		GameController.OnNewRound += EnablePlay;
+	}
 
 	void Update()
 	{
 		if (shotCooldownRemaining <= 0)
 		{
-			if (Input.GetButton("Fire1"))
+			if (Input.GetButton("Fire1") && canShoot)
 			{
 				shotCooldownRemaining = shotCooldown;
 
@@ -27,6 +33,11 @@ public class PlayerController : MonoBehaviour
 		{
 			shotCooldownRemaining -= Time.deltaTime;
 		}
+	}
+
+	public void EnablePlay()
+	{
+		canShoot = true;
 	}
 
 	protected void FireWeapon()
