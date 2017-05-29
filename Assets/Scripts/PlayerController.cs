@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
 		GameController.OnNewRound += EnablePlay;
 	}
 
+	void Start()
+	{
+		if (GameController.primaryGC == null)
+		{
+			EnablePlay();
+		}
+	}
+
 	void Update()
 	{
 		if (shotCooldownRemaining <= 0)
