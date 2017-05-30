@@ -30,11 +30,18 @@ public class PlayerController : MonoBehaviour
 	{
 		if (shotCooldownRemaining <= 0)
 		{
-			if (Input.GetButton("Fire1") && canShoot)
+			if (Input.GetButton("Fire1"))
 			{
-				shotCooldownRemaining = shotCooldown;
+				if (canShoot)
+				{
+					shotCooldownRemaining = shotCooldown;
 
-				FireWeapon();
+					FireWeapon();
+				}
+				else
+				{
+					Debug.Log("You are not yet allowed to fire.");
+				}
 			}
 		}
 		else
