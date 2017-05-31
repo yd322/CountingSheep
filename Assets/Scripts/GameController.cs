@@ -104,6 +104,7 @@ public class GameController : MonoBehaviour
 					//sheepRB.AddForce(1000f * newSheep.transform.forward);
 					//sheepRB.velocity = 20f * Vector3.Normalize(spawnPoint.up + spawnPoint.forward);
 					//sheepRB.AddForce(Vector3.Normalize(spawnPoint.up + (spawnPoint.right * -1f)) * 20f, ForceMode.VelocityChange);
+					//sheepRB.AddForce(Vector3.Normalize(spawnPoint.up + spawnPoint.forward) * 20f);
 				}
 				else
 				{
