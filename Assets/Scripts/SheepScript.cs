@@ -326,7 +326,10 @@ public class SheepScript : MonoBehaviour
 
 		if (explosion != null)
 		{
-			Instantiate(explosion, transform.position, Quaternion.identity);
+			ParticleSystem expl = (ParticleSystem)Instantiate(explosion, transform.position, Quaternion.identity);
+			AudioSource explAS = expl.GetComponent<AudioSource>();
+
+			SoundManager.PlayRandomSoundFromSource(explAS, explosionSounds);
 		}
 
 		if (destination != null)
