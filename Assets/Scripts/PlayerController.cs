@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+	public GameObject errorPrompt;
 	public GameObject projectile;
 	public Vector3 projectileSpawnOffset;
 	[Range (0f, 10f)]
@@ -37,10 +38,15 @@ public class PlayerController : MonoBehaviour
 					shotCooldownRemaining = shotCooldown;
 
 					FireWeapon();
+
+					errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
+
 				}
 				else
 				{
 					Debug.Log("You are not yet allowed to fire.");
+					errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "You are not yet allowed to fire until all sheep are created.";
+
 				}
 			}
 		}

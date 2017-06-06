@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
 	protected IEnumerator InitializeGame()
 	{
 		// Spawn some initial number of sheep. Currently 5 for every spawn point.
-		for (int x = 0; x < 5; x++)
+		for (int x = 0; x < 7; x++)
 		{
 			// Wait a moment for the new sheep to move out of the way.
 			yield return new WaitForSeconds(2f);
@@ -103,7 +103,17 @@ public class GameController : MonoBehaviour
 				// We're making this sheep have an operator.
 				else
 				{
-					sheepVal = Random.Range(10, sheepSkins.Length);
+					int result = Random.Range(0, 3);
+
+					// Give operator sheep a plus sign a third of the time.
+					if (result == 0)
+					{
+						sheepVal = 10;
+					}
+					else
+					{
+						sheepVal = Random.Range(11, sheepSkins.Length);
+					}
 				}
 
 				newSheep.SetSheepValue(sheepVal, sheepSkins[sheepVal]);
