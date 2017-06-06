@@ -199,7 +199,7 @@ public class SheepScript : MonoBehaviour
 
 	public void SetSheepValue(int val, Material skin)
 	{
-		sheepValue = val;
+		sheepValue = val+1;
 
 		if (skin != null)
 		{
