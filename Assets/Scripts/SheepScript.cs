@@ -6,39 +6,38 @@ public class SheepScript : MonoBehaviour
 {
 	public int sheepValue;
 	public GameObject bodyPiece;
-	public float moveSpeed = 5f;
-	public float turnSpeed = 0.1f;
+	public float moveSpeed = 2f;
+	public float turnSpeed = 0.001f;
 
 	private MeshRenderer myMR;
-	//private Rigidbody myRB;
 	private Transform destination;
 	private float attentionSpan;
 	private IEnumerator turnRoutine;
+	private bool inTurnRoutine = false;
 	private IEnumerator walkRoutine;
+	//private static bool testSheepExists = false;
+	//private bool isTestSheep = false;
 
 	void Awake()
 	{
+		/*
+		if (!testSheepExists)
+		{
+			testSheepExists = true;
+			isTestSheep = true;
+		}
+		*/
+
 		if (bodyPiece != null)
 		{
 			myMR = bodyPiece.GetComponent<MeshRenderer>();
 		}
 
-		//myRB = GetComponent<Rigidbody>();
-
-		SetNewDestination();
 		attentionSpan = Random.Range(3f, 7.5f);
-		//turnRoutine = StartCoroutine(Turn());
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
-		/*
-		if (myRB)
-		{
-
-		}
-		*/
-
 		// Prevent non-Y rotation.
 		transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
 	}
@@ -48,10 +47,18 @@ public class SheepScript : MonoBehaviour
 		if (destination == null)
 		{
 			destination = (new GameObject()).transform;
+			destination.gameObject.name = gameObject.name + "_destination";
 		}
 
-		Vector3 destPos = new Vector3(Random.Range(-15f, 15f), 0f, Random.Range(-15f, 15f));
+		Vector3 destPos = new Vector3(Random.Range(-15f, 15f), transform.position.y, Random.Range(-15f, 15f));
 		destination.position = destPos;
+
+		/*
+		if (isTestSheep)
+		{
+			Debug.Log("New destination set at " + destPos + ".");
+		}
+		*/
 	}
 
 	private void ReverseDestination()
@@ -67,23 +74,75 @@ public class SheepScript : MonoBehaviour
 
 	private IEnumerator Turn()
 	{
+		//Debug.Log("Starting turning.");
+		inTurnRoutine = true;
+
 		if (walkRoutine != null)
 		{
 			StopCoroutine(walkRoutine);
 		}
 
-		Quaternion startRot = transform.rotation;
-		float currentRot = transform.rotation.y;
-		//transform.rotation = Quaternion.Slerp(startRot, to.rotation, Time.time * speed);
+		if (destination != null)
+		{
+			float threshold = 0.05f;
 
-		yield return null;
+			/*
+			if (isTestSheep)
+			{
+				Debug.Log("Starting rotation: " + startRot.eulerAngles + ", current angle: " + currentAngle + ", ending rotation: " + endRot.eulerAngles + ", end angle: " + endAngle + ".");
+			}
+			*/
+
+			int debugCounter = 120;
+
+			Vector3 relativePos = new Vector3(destination.position.x - transform.position.x, transform.position.y, destination.position.z - transform.position.z);
+			Quaternion targetRot = Quaternion.LookRotation(relativePos);
+			float previousAngle = transform.rotation.eulerAngles.y;
+
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 2f);
+			float currentAngle = transform.rotation.eulerAngles.y;
+
+			while (Mathf.Abs(currentAngle - previousAngle) > threshold)//(previousAngle != currentAngle)//(Mathf.Abs(currentAngle - endAngle) % 360f) > threshold)
+			{
+				yield return null;
+
+				previousAngle = currentAngle;
+
+				transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 2f);
+				currentAngle = transform.rotation.eulerAngles.y;
+
+				/*
+				if (isTestSheep)
+				{
+					debugCounter--;
+					if (debugCounter == 0)
+					{
+						debugCounter = 120;
+
+						//Debug.Log("Current angle: " + currentAngle + ". Calculation: " + (Mathf.Abs(currentAngle - endAngle) % 360f) + ".");
+						Debug.Log("Current angle: " + currentAngle + ". Previous angle: " + previousAngle + ".");
+					}
+				}
+				*/
+			}
+		}
+
+		/*
+		if (isTestSheep)
+		{
+			Debug.Log("Done turning.");
+		}
+		*/
 
 		walkRoutine = Walk();
 		StartCoroutine(walkRoutine);
+		inTurnRoutine = false;
 	}
 
 	private IEnumerator Walk()
 	{
+		//Debug.Log("Starting walking.");
+
 		float startTime = Time.time;
 		float hardEndTime = startTime + attentionSpan;
 		Vector3 initPos = transform.position;
@@ -91,14 +150,21 @@ public class SheepScript : MonoBehaviour
 
 		float move;
 
-		while (initPos != destination.position && ((Time.time - startTime) * moveSpeed) < 1f && startTime < hardEndTime)
+		while (initPos != destination.position && ((Time.time - startTime) * moveSpeed) < 1f && Time.time < hardEndTime)
 		{ 
-			move = Mathf.Lerp (0,1, (Time.time - startTime) * moveSpeed);
+			move = Mathf.Lerp (0,1, Mathf.Clamp((Time.time - startTime) * moveSpeed, 0f, moveSpeed));
 
 			transform.position += dir * move;
 
 			yield return null;
 		}
+
+		/*
+		if (isTestSheep)
+		{
+			Debug.Log("Done walking.");
+		}
+		*/
 
 		// Stand still and wait out any remaining time.
 		if (Time.time < hardEndTime)
@@ -116,18 +182,18 @@ public class SheepScript : MonoBehaviour
 	{
 		GameObject hit = col.gameObject;
 
-		if (hit.tag != "Player")
+		if (hit.tag != "Player" && !inTurnRoutine)
 		{
 			if (turnRoutine != null)
 			{
 				StopCoroutine(turnRoutine);
 			}
 
-			//ReverseDestination();
 			SetNewDestination();
+			//ReverseDestination();
 
 			turnRoutine = Turn();
-			//StartCoroutine(turnRoutine);
+			StartCoroutine(turnRoutine);
 		}
 	}
 
@@ -163,6 +229,13 @@ public class SheepScript : MonoBehaviour
 		if (GameController.primaryGC != null)
 		{
 			GameController.primaryGC.SpawnSheepRandom();
+		}
+
+		StopAllCoroutines();
+
+		if (destination != null)
+		{
+			Destroy(destination.gameObject);
 		}
 
 		Destroy(gameObject);

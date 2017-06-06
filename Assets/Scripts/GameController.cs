@@ -111,7 +111,7 @@ public class GameController : MonoBehaviour
 					Debug.Log("No rigidbody found on spawned sheep.");
 				}
 
-				Debug.Log("Sheep spawned.");
+				//Debug.Log("Sheep spawned.");
 			}
 		}
 		else
