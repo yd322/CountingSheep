@@ -56,7 +56,8 @@ public class Arithmetic : MonoBehaviour {
 		GameController.OnNewRound -= BeginGame;
 
 		// Printing the Integer on Screen at Time Intervals
-		InvokeRepeating("PrintIntegerOnScreen", 0.0f, 90.0f);
+		//InvokeRepeating("PrintIntegerOnScreen", 0.0f, 90.0f);
+		PrintIntegerOnScreen();
 		InvokeRepeating("Countdown", 0.0f, 1.0f);
 	}
 
@@ -80,6 +81,12 @@ public class Arithmetic : MonoBehaviour {
 
 		
 		countdownValue--;
+		if (countdownValue == 0)
+		{
+			// PUT ROUND LOSS STUFF HERE.
+
+			PrintIntegerOnScreen();
+		}
 	}
 
 
@@ -139,19 +146,19 @@ public class Arithmetic : MonoBehaviour {
 		}
 
 		// If score is a + operator
-		if (val == 11)
+		else if (val == 11)
 			beforeOperator = "+";
 
 		// If score is a - operator
-		if (val == 12)
+		else if (val == 12)
 			beforeOperator = "-";
 		
 		// If score is a x operator
-		if (val == 13)
+		else if (val == 13)
 			beforeOperator = "x";
 		
 		// If score is a / operator
-		if (val == 14)
+		else if (val == 14)
 			beforeOperator = "/";
 
 		result =  value;
@@ -179,6 +186,12 @@ public class Arithmetic : MonoBehaviour {
 			equationnew = "";
 			initial = 1;
 			beforeOperator = "+";
+
+			if (countdownFill != null)
+			{
+				countdownFill.fillAmount = 1f;
+			}
+
 			PrintIntegerOnScreen ();
 		}
 		else {
