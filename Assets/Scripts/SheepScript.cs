@@ -19,7 +19,9 @@ public class SheepScript : MonoBehaviour
 	public float baseTurnSpeed;			// Speed in degrees that the sheep will be allowed to turn per frame. Current base: 2f.
 	[Range (2f, 20f)]
 	public float maxTurnSpeed;			// Maximum turning speed the sheep can achieve after some number of rounds.
+	public AudioClip[] bleats;			// Array of potential sheep bleating noises.
 	public ParticleSystem explosion;	// The ParticleSystem prefab to be spawned upon sheep murder.
+	public AudioClip[] explosionSounds;	// Array of potential poof noises.
 
 	private MeshRenderer myMR;			// MeshRenderer of the bodyPiece.
 	private AudioSource myAS;			// AudioSource for bleating.
@@ -235,13 +237,15 @@ public class SheepScript : MonoBehaviour
 		}
 		*/
 
-		if (myAS != null && myAS.clip != null)
+		if (myAS != null)// && myAS.clip != null)
 		{
 			int coinflip = Random.Range(0, 2);
 
 			if (coinflip == 0)
 			{
-				myAS.PlayOneShot(myAS.clip);
+				//myAS.PlayOneShot(myAS.clip);
+
+				SoundManager.PlayRandomSoundFromSource(myAS, bleats);
 			}
 		}
 
@@ -313,6 +317,12 @@ public class SheepScript : MonoBehaviour
 		}
 
 		StopAllCoroutines();
+
+		if (myAS != null)
+		{
+			myAS.Stop();
+			SoundManager.PlayRandomSoundFromSource(myAS, explosionSounds);
+		}
 
 		if (explosion != null)
 		{
