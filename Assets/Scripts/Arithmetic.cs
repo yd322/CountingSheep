@@ -29,6 +29,35 @@ public class Arithmetic : MonoBehaviour {
 	private int result = 0;
 	private int countdownValue = 90;
 
+	// Lives
+
+	public GameObject Life1;
+	public GameObject Life2;
+	public GameObject Life3;
+	public GameObject Life4;
+	public GameObject Life5;
+
+	// Points
+
+	public GameObject Point1;
+	public GameObject Point2;
+	public GameObject Point3;
+	public GameObject Point4;
+	public GameObject Point5;
+	public GameObject Point6;
+	public GameObject Point7;
+	public GameObject Point8;
+	public GameObject Point9;
+	public GameObject Point10;
+	public GameObject Point11;
+	public GameObject Point12;
+	public GameObject Point13;
+	public GameObject Point14;
+	public GameObject Point15;
+	public GameObject Point16;
+	public GameObject Point17;
+	public GameObject Point18;
+
 	void Awake()
 	{
 		if (primaryArithmetic == null) {
@@ -49,6 +78,12 @@ public class Arithmetic : MonoBehaviour {
 
 		// Initial Display Message
 		StartCoroutine(InitialLoad());
+
+		// Enabling all lives at the start of game
+		countLivesIconUpdate();
+
+		// Disabling all points at the start of game
+		countPointsIconUpdate();
 	}
 	
 	void BeginGame()
@@ -83,10 +118,79 @@ public class Arithmetic : MonoBehaviour {
 		countdownValue--;
 		if (countdownValue == 0)
 		{
-			// PUT ROUND LOSS STUFF HERE.
+			// ADD ROUND LOSS UPDATE CODE HERE
+			countLives--;
+			StartCoroutine (LossofLife ());
+			countLivesIconUpdate ();
 
 			PrintIntegerOnScreen();
 		}
+	}
+
+	void countLivesIconUpdate (){
+
+		if (countLives == 5) {
+			Life1.SetActive (true);
+			Life2.SetActive (true);
+			Life3.SetActive (true);
+			Life4.SetActive (true);
+			Life5.SetActive (true);
+		}
+
+		if (countLives == 4) {
+			Life1.SetActive (true);
+			Life2.SetActive (true);
+			Life3.SetActive (true);
+			Life4.SetActive (true);
+			Life5.SetActive (false);
+
+		}
+
+		if (countLives == 3) {
+
+			Life1.SetActive (true);
+			Life2.SetActive (true);
+			Life3.SetActive (true);
+			Life4.SetActive (false);
+			Life5.SetActive (false);
+		}
+
+		if (countLives == 2) {
+
+			Life1.SetActive (true);
+			Life2.SetActive (true);
+			Life3.SetActive (false);
+			Life4.SetActive (false);
+			Life5.SetActive (false);
+		}
+
+		if (countLives == 1) {
+			Life1.SetActive (true);
+			Life2.SetActive (false);
+			Life3.SetActive (false);
+			Life4.SetActive (false);
+			Life5.SetActive (false);
+		}
+
+		if (countLives == 0) {
+			Life1.SetActive (false);
+			Life2.SetActive (false);
+			Life3.SetActive (false);
+			Life4.SetActive (false);
+			Life5.SetActive (false);
+
+			// Calling gameOver Routine since all lives are lost
+			StartCoroutine(gameOver());
+
+		}
+
+	}
+
+	// Display Instructions when the game starts for a few seconds and then make it disappear
+	IEnumerator gameOver() {
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "All your lives are lost. Game over.";
+		yield return new WaitForSeconds(2f);
+		Application.Quit ();
 	}
 
 
@@ -171,6 +275,11 @@ public class Arithmetic : MonoBehaviour {
 		// If a Succesfull Match is Made for the Equation==Result
 		if (value.Equals (randomInt)) {
 
+			// ADD POINT SYSTEM UPDATE CODE HERE
+
+			countPoints++;
+			countPointsIconUpdate ();
+
 			// Setting UI to Default
 			currentvalue.GetComponent<UnityEngine.UI.Text> ().text = "0";
 			operation.GetComponent<UnityEngine.UI.Text> ().text = "+";
@@ -211,9 +320,427 @@ public class Arithmetic : MonoBehaviour {
 	// Display Instructions when the game starts for a few seconds and then make it disappear
 	IEnumerator InitialLoad() {
 		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "Shoot Sheep to choose an Operator or Value for the equation below";
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(6f);
 		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
 	}
+
+	// Display Loss of Life Prompt
+	IEnumerator LossofLife() {
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "Ran out of time! One life has been lost.";
+		yield return new WaitForSeconds(2f);
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
+	}
+
+
+	void countPointsIconUpdate (){
+
+		if (countPoints == 0) {
+			Point1.SetActive (false);
+			Point2.SetActive (false);
+			Point3.SetActive (false);
+			Point4.SetActive (false);
+			Point5.SetActive (false);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 1) {
+			Point1.SetActive (true);
+			Point2.SetActive (false);
+			Point3.SetActive (false);
+			Point4.SetActive (false);
+			Point5.SetActive (false);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+
+		}
+
+		if (countPoints == 2) {
+
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (false);
+			Point4.SetActive (false);
+			Point5.SetActive (false);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 3) {
+
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (false);
+			Point5.SetActive (false);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 4) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (false);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 5) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (false);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 6) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (false);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 7) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (false);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 8) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (false);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 9) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (false);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 10) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (false);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 11) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (false);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 12) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (false);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 13) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (false);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 14) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (true);
+			Point15.SetActive (false);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 15) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (true);
+			Point15.SetActive (true);
+			Point16.SetActive (false);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 16) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (true);
+			Point15.SetActive (true);
+			Point16.SetActive (true);
+			Point17.SetActive (false);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 17) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (true);
+			Point15.SetActive (true);
+			Point16.SetActive (true);
+			Point17.SetActive (true);
+			Point18.SetActive (false);
+		}
+
+		if (countPoints == 18) {
+			Point1.SetActive (true);
+			Point2.SetActive (true);
+			Point3.SetActive (true);
+			Point4.SetActive (true);
+			Point5.SetActive (true);
+			Point6.SetActive (true);
+			Point7.SetActive (true);
+			Point8.SetActive (true);
+			Point9.SetActive (true);
+			Point10.SetActive (true);
+			Point11.SetActive (true);
+			Point12.SetActive (true);
+			Point13.SetActive (true);
+			Point14.SetActive (true);
+			Point15.SetActive (true);
+			Point16.SetActive (true);
+			Point17.SetActive (true);
+			Point18.SetActive (true);
+		}
+
+	}
+
+
+
+
 
 
 	void OnDestroy()
