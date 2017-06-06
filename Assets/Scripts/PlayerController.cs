@@ -44,9 +44,7 @@ public class PlayerController : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("You are not yet allowed to fire.");
-					errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "You are not yet allowed to fire until all sheep are created.";
-
+					StartCoroutine(NotAllowedToShoot());
 				}
 			}
 		}
@@ -55,6 +53,14 @@ public class PlayerController : MonoBehaviour
 			shotCooldownRemaining -= Time.deltaTime;
 		}
 	}
+
+	// Display "Not Allowed to Shoot Until Sheep are all spawned" for a few seconds and make it disappear
+	IEnumerator NotAllowedToShoot() {
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "You are not yet allowed to fire until all sheep are created.";
+		yield return new WaitForSeconds(6f);
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
+	}
+
 
 	public void EnablePlay()
 	{

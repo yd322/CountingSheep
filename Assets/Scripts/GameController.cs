@@ -46,8 +46,8 @@ public class GameController : MonoBehaviour
 
 	protected IEnumerator InitializeGame()
 	{
-		// Spawn some initial number of sheep. Currently 5 for every spawn point.
-		for (int x = 0; x < 7; x++)
+		// Spawn some initial number of sheep. Currently 7 for every spawn point.
+		for (int x = 0; x < 8; x++)
 		{
 			// Wait a moment for the new sheep to move out of the way.
 			yield return new WaitForSeconds(2f);
