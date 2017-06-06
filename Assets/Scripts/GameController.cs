@@ -8,6 +8,15 @@ public class GameController : MonoBehaviour
 
 	public static void RaiseOnNewRound()
 	{
+		if (isFirstRound)
+		{
+			isFirstRound = false;
+		}
+		else
+		{
+			SheepScript.IncreaseSheepSpeedGlobal();
+		}
+
 		if (OnNewRound != null)
 		{
 			OnNewRound();
@@ -19,6 +28,8 @@ public class GameController : MonoBehaviour
 	public Transform[] spawnPoints;
 	public SheepScript sheepTemplate;
 	public Material[] sheepSkins;
+
+	private static bool isFirstRound = true;
 
 	void Awake()
 	{

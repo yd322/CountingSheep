@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class SheepScript : MonoBehaviour
 {
-	public int sheepValue;
-	public GameObject bodyPiece;
-	public float moveSpeed = 2f;
-	public float turnSpeed = 0.001f;
-	public ParticleSystem explosion;
+	private static float currentMoveSpeed;
+	private static float moveSpeedMod = 0.005f;	// Amount added to movement speed at the end of each round.
+	private static float currentTurnSpeed;
+	private static float turnSpeedMod = 0.2f;	// Amount added to turning speed at the end of each round.
 
-	private MeshRenderer myMR;
-	private AudioSource myAS;
-	private Transform destination;
-	private float attentionSpan;
-	private IEnumerator turnRoutine;
-	private bool inTurnRoutine = false;
-	private IEnumerator walkRoutine;
+	public int sheepValue;				// The value of the sheep for the purposes of arithmetic.
+	public GameObject bodyPiece;		// The main body segment of the sheep to which materials for different symbols are applied.
+	[Range (0f, 10f)]
+	public float baseMoveSpeed;			// Speed modifier for sheep forward movement. Current base: 0.05f.
+	[Range (0f, 20f)]
+	public float maxMoveSpeed;			// Maximum movement speed the sheep can achieve after some number of rounds.
+	[Range (2f, 10f)]
+	public float baseTurnSpeed;			// Speed in degrees that the sheep will be allowed to turn per frame. Current base: 2f.
+	[Range (2f, 20f)]
+	public float maxTurnSpeed;			// Maximum turning speed the sheep can achieve after some number of rounds.
+	public ParticleSystem explosion;	// The ParticleSystem prefab to be spawned upon sheep murder.
+
+	private MeshRenderer myMR;			// MeshRenderer of the bodyPiece.
+	private AudioSource myAS;			// AudioSource for bleating.
+	private Transform destination;		// Generated destination guide object.
+	private float attentionSpan;		// Semi-randomly generated time that sheep will continue to move forward without colliding before turning.
+	private IEnumerator turnRoutine;	// Reference to the sheep's potentially ongoing turning routine.
+	private bool inTurnRoutine = false;	// Indicator of whether a turning routine is actually ongoing, to prevent turn looping.
+	private IEnumerator walkRoutine;	// Reference to the sheep's potentially ongoing walking routine.
 	//private static bool testSheepExists = false;
 	//private bool isTestSheep = false;
 
@@ -30,6 +41,36 @@ public class SheepScript : MonoBehaviour
 		}
 		*/
 
+		GameController.OnNewRound += IncreaseSheepSpeed;
+
+		if (baseMoveSpeed > maxMoveSpeed)
+		{
+			baseMoveSpeed = maxMoveSpeed;
+		}
+
+		if (baseTurnSpeed > maxTurnSpeed)
+		{
+			baseTurnSpeed = maxTurnSpeed;
+		}
+
+		if (baseMoveSpeed > currentMoveSpeed)
+		{
+			currentMoveSpeed = baseMoveSpeed;
+		}
+		else
+		{
+			baseMoveSpeed = currentMoveSpeed;
+		}
+
+		if (baseTurnSpeed > currentTurnSpeed)
+		{
+			currentTurnSpeed = baseTurnSpeed;
+		}
+		else
+		{
+			baseTurnSpeed = currentTurnSpeed;
+		}
+
 		if (bodyPiece != null)
 		{
 			myMR = bodyPiece.GetComponent<MeshRenderer>();
@@ -38,12 +79,36 @@ public class SheepScript : MonoBehaviour
 		myAS = GetComponent<AudioSource>();
 
 		attentionSpan = Random.Range(3f, 7.5f);
+
+		if (explosion != null)
+		{
+			Instantiate(explosion, transform.position, Quaternion.identity);
+		}
 	}
 
 	void Update()
 	{
 		// Prevent non-Y rotation.
 		transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+	}
+
+	public static void IncreaseSheepSpeedGlobal()
+	{
+		currentMoveSpeed += moveSpeedMod;
+		currentTurnSpeed += turnSpeedMod;
+	}
+
+	private void IncreaseSheepSpeed()
+	{
+		if (baseMoveSpeed < currentMoveSpeed)
+		{
+			baseMoveSpeed = currentMoveSpeed;
+		}
+
+		if (baseTurnSpeed < currentTurnSpeed)
+		{
+			baseTurnSpeed = currentTurnSpeed;
+		}
 	}
 
 	private void SetNewDestination()
@@ -103,7 +168,7 @@ public class SheepScript : MonoBehaviour
 			Quaternion targetRot = Quaternion.LookRotation(relativePos);
 			float previousAngle = transform.rotation.eulerAngles.y;
 
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 2f);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, currentTurnSpeed);
 			float currentAngle = transform.rotation.eulerAngles.y;
 
 			while (Mathf.Abs(currentAngle - previousAngle) > threshold)//(previousAngle != currentAngle)//(Mathf.Abs(currentAngle - endAngle) % 360f) > threshold)
@@ -112,7 +177,7 @@ public class SheepScript : MonoBehaviour
 
 				previousAngle = currentAngle;
 
-				transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 2f);
+				transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, currentTurnSpeed);
 				currentAngle = transform.rotation.eulerAngles.y;
 
 				/*
@@ -154,9 +219,9 @@ public class SheepScript : MonoBehaviour
 
 		float move;
 
-		while (initPos != destination.position && ((Time.time - startTime) * moveSpeed) < 1f && Time.time < hardEndTime)
+		while (initPos != destination.position && ((Time.time - startTime) * currentMoveSpeed) < 1f && Time.time < hardEndTime)
 		{ 
-			move = Mathf.Lerp (0,1, Mathf.Clamp((Time.time - startTime) * moveSpeed, 0f, moveSpeed));
+			move = Mathf.Lerp (0,1, Mathf.Clamp((Time.time - startTime) * currentMoveSpeed, 0f, currentMoveSpeed));
 
 			transform.position += dir * move;
 
@@ -235,6 +300,8 @@ public class SheepScript : MonoBehaviour
 
 	public void KillSheep()
 	{
+		GameController.OnNewRound -= IncreaseSheepSpeed;
+
 		if (Arithmetic.primaryArithmetic != null)
 		{
 			Arithmetic.primaryArithmetic.PrintEquationOnScreen (sheepValue);
