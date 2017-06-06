@@ -14,6 +14,8 @@ public class Arithmetic : MonoBehaviour {
 	public GameObject errorPrompt;
 	public Image countdownFill;
 
+	private int countLives = 5;
+	private int countPoints = 0;
 
 	public static Arithmetic primaryArithmetic;
 	private int valueGenMin = 1;
@@ -45,7 +47,8 @@ public class Arithmetic : MonoBehaviour {
 		expected.GetComponent<UnityEngine.UI.Text> ().text = "";
 		countdown.GetComponent<UnityEngine.UI.Text> ().text = "1:" + (countdownValue-60);
 
-
+		// Initial Display Message
+		StartCoroutine(InitialLoad());
 	}
 	
 	void BeginGame()
@@ -60,20 +63,18 @@ public class Arithmetic : MonoBehaviour {
 	void Countdown()
 	{
 		if (countdownValue < 60) {
-			countdown.GetComponent<UnityEngine.UI.Text> ().text = "0:" + countdownValue;
+			int display = countdownValue;
+			countdown.GetComponent<UnityEngine.UI.Text> ().text = "0:" + display.ToString ("D2");
 		} else {
-			countdown.GetComponent<UnityEngine.UI.Text> ().text = "1:" + (countdownValue - 60);
+			int display = (countdownValue - 60);
+			countdown.GetComponent<UnityEngine.UI.Text> ().text = ("1:" + display.ToString ("D2"));
 		}
 
-	
 		if (countdownFill != null) {
 			if (countdownValue == 90) {
 				countdownFill.fillAmount = 1f;
-				Debug.Log ("YO YO YO");
 			} else {
 				countdownFill.fillAmount -= (1f / 180f);
-				Debug.Log ("NO NO NO");
-
 			}
 		}
 
@@ -94,7 +95,20 @@ public class Arithmetic : MonoBehaviour {
 
 		// Setting GUItext Score to a Random Generated Value
 		expected.GetComponent<UnityEngine.UI.Text>().text = "" + randomInt.ToString();
+		// Setting UI to Default
+		currentvalue.GetComponent<UnityEngine.UI.Text> ().text = "0";
+		operation.GetComponent<UnityEngine.UI.Text> ().text = "+";
+
+
+		// Countdown Value RESET back to 90
 		countdownValue = 90;
+
+		// Resetting all variables
+		value = 0;
+		equationnew = "";
+		initial = 1;
+		beforeOperator = "+";
+	
 	}
 
 
@@ -109,15 +123,19 @@ public class Arithmetic : MonoBehaviour {
 			
 			if ((beforeOperator == "+") || (beforeOperator == ""))
 				value += val;
-			if (beforeOperator == "-")
+			if (beforeOperator == "-") {
 				value -= val;
+
+				// Setting Threshold as 0, and not allowing any negative values
+				if (value < 0)
+					value = 0;
+			}
 			if (beforeOperator == "x")
 				value *= val;
 			if (beforeOperator == "/")
 				value /= val;
-			else // When a sheep with an Operator was not selected in the previous shot, nothing happens
-				value = value;	
-			
+			// When a sheep with an Operator was not selected in the previous shot, nothing happens
+
 		}
 
 		// If score is a + operator
@@ -151,7 +169,7 @@ public class Arithmetic : MonoBehaviour {
 			operation.GetComponent<UnityEngine.UI.Text> ().text = "+";
 
 			// Displaying Success
-			errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "Values Succesfully Matched!";
+			StartCoroutine(SuccessfullyMatched());
 
 
 
@@ -168,6 +186,20 @@ public class Arithmetic : MonoBehaviour {
 			currentvalue.GetComponent<UnityEngine.UI.Text> ().text = "" + result;
 		}
 
+	}
+
+	// Display "Values Matched" for a second and make it disappear
+	IEnumerator SuccessfullyMatched() {
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "Values Succesfully Matched!";
+		yield return new WaitForSeconds(2);
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
+	}
+
+	// Display Instructions when the game starts for a few seconds and then make it disappear
+	IEnumerator InitialLoad() {
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "Shoot Sheep to choose an Operator or Value for the equation below";
+		yield return new WaitForSeconds(10f);
+		errorPrompt.GetComponent<UnityEngine.UI.Text> ().text = "";
 	}
 
 
