@@ -8,8 +8,10 @@ public class SheepScript : MonoBehaviour
 	public GameObject bodyPiece;
 	public float moveSpeed = 2f;
 	public float turnSpeed = 0.001f;
+	public ParticleSystem explosion;
 
 	private MeshRenderer myMR;
+	private AudioSource myAS;
 	private Transform destination;
 	private float attentionSpan;
 	private IEnumerator turnRoutine;
@@ -32,6 +34,8 @@ public class SheepScript : MonoBehaviour
 		{
 			myMR = bodyPiece.GetComponent<MeshRenderer>();
 		}
+
+		myAS = GetComponent<AudioSource>();
 
 		attentionSpan = Random.Range(3f, 7.5f);
 	}
@@ -166,6 +170,16 @@ public class SheepScript : MonoBehaviour
 		}
 		*/
 
+		if (myAS != null && myAS.clip != null)
+		{
+			int coinflip = Random.Range(0, 2);
+
+			if (coinflip == 0)
+			{
+				myAS.PlayOneShot(myAS.clip);
+			}
+		}
+
 		// Stand still and wait out any remaining time.
 		if (Time.time < hardEndTime)
 		{
@@ -232,6 +246,11 @@ public class SheepScript : MonoBehaviour
 		}
 
 		StopAllCoroutines();
+
+		if (explosion != null)
+		{
+			Instantiate(explosion, transform.position, Quaternion.identity);
+		}
 
 		if (destination != null)
 		{
