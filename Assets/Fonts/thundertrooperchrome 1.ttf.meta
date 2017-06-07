@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c9f0e30e773cb43ceb997eaeacf61499
+timeCreated: 1496795315
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Thunder Trooper Chrome
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 746a7a939eb5043bbade4815294f2413, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

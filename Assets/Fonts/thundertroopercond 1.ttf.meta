@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a72774f2f4a564ef8b35d695a4e14efe
+timeCreated: 1496795315
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Thunder Trooper Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2ff5ca545406f4bc8a8bc4c6dfd9eb78, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

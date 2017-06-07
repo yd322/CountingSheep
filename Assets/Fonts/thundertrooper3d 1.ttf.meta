@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2a061a94f5cbb4eea89a1a0ee1597fa3
+timeCreated: 1496795315
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Thunder Trooper 3D
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8395a5ca7197b4a6c8a69363c9e99b75, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

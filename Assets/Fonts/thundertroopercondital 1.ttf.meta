@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: af40626a0552d488394042f32ebd0488
+timeCreated: 1496795315
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Thunder Trooper Condensed Italic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8e91d03d8618b4363b2ea2e219536c24, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
